@@ -20,3 +20,18 @@ impl Default for User {
         Self::new(String::new(), String::new())
     }
 }
+
+// tuple struct
+
+#[derive(Debug, PartialEq)]
+pub struct Width(pub u32);
+
+#[derive(Debug, PartialEq)]
+pub struct Height(pub u32);
+
+#[derive(Debug, PartialEq)]
+pub struct Rect(pub Width, pub Height);
+
+pub fn make_rect(width: Width, height: Height) -> Rect {
+    Rect(width, height)
+}
