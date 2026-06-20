@@ -28,3 +28,11 @@ pub trait Alertable: Processor + Formattable {
         Some(format!("Alert: {}", self.type_name()))
     }
 }
+
+// Trait objects
+// dynamic é decidido em tempo de execução
+pub fn process_alertables(alertables: &Vec<Box<dyn Alertable>>) {
+    for alertable in alertables {
+        alertable.process();
+    }
+}

@@ -49,4 +49,19 @@ mod tests {
         };
         assert_eq!(payload.alert(), Some("test".to_string()));
     }
+
+    #[test]
+    fn test_process_alertables() {
+        let alertables: Vec<Box<dyn Alertable>> = vec![
+            Box::new(LogPayload {
+                message: "test".to_string(),
+                level: "info".to_string(),
+            }),
+            Box::new(LogPayload {
+                message: "test".to_string(),
+                level: "error".to_string(),
+            }),
+        ];
+        process_alertables(&alertables);
+    }
 }
