@@ -1,3 +1,5 @@
+use core::fmt;
+
 pub trait Processor {
     fn process(&self);
     fn type_name(&self) -> &str;
@@ -34,5 +36,18 @@ pub trait Alertable: Processor + Formattable {
 pub fn process_alertables(alertables: &Vec<Box<dyn Alertable>>) {
     for alertable in alertables {
         alertable.process();
+    }
+}
+
+// Orphan rule
+// New type wrapper
+pub struct Metrics(pub Vec<String>);
+
+impl fmt::Display for Metrics {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        for metric in &self.0 {
+            writeln!(f, "{}", metric)?;
+        }
+        Ok(())
     }
 }
